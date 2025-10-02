@@ -1,23 +1,30 @@
 const express = require('express');
 const app = express();
-const PORT = 808155;
+const PORT = 8081;
 
 app.use(express.json())
-// app.post('/mensagem', (req, res) => {
-//     try {
-//         // Forma 1 - desestruturação
-//         const { id, descricao, valor } = req.body.dadosProdutos;
-//         const { nome, cpf } = req.body.dadosCliente;
-
-//         console.log(id, descricao, valor)
-//         console.log(nome, cpf)
-//     });
-
-app.post('/mensagem', (req, res) => {
+async function validaçao(pNumUm, pNumDois) {
     try {
-        const { nome, idade, time } = req.body;
-        console.log(nome, idade, time);
-        res.status(201).json({ message: `Ola ${nome}, Você tem ${idade} anos e torce para o ${time}!`});
+        if (isNaN(pNumUm) || isNaN(pNumDois)) {
+            throw new Error("Os valores digitados são inválidos")
+        }
+        const numero1 = parseFloat(pNumUm);
+        const numero2 = parseFloat(pNumDois);
+        const numero3 = parseFloat(pNumDois);
+        return { numero1, numero2, numero3};
+    } catch (error) {
+        throw new Error(error)
+    }
+}
+
+app.post('/soma', (req, res) => {
+    try {
+        const { numero1, numero2, numero3 } = req.body;
+        console.log(numero1, numero2, numero3);
+        let resultado;
+        resultado = numero1 + numero2 + numero3
+        console.log(resultado)
+        res.status(201).json({ message: `${resultado}`});
 
     } catch (error) {
        console.error(error);
