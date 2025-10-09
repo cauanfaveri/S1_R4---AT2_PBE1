@@ -22,7 +22,7 @@ app.post('/soma', async (req, res) => {
         const { numero1, numero2, numero3 } = req.body;
         console.log(numero1, numero2, numero3);
         const {num1, num2, num3} = await validaçao(numero1,  numero2, numero3);
-        resultado = num1 + num2 + num3
+        resultado = num1 + num2 + num3;
         console.log(resultado)
         res.status(201).json({ message: `${resultado}`});
 
